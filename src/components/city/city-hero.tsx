@@ -1,16 +1,14 @@
-import Image from 'next/image'
 import type { City } from '@/types'
 
 export function CityHero({ city }: { city: City }) {
   return (
-    <div className="relative h-56 md:h-72 w-full">
+    <div className="relative h-56 md:h-72 w-full overflow-hidden">
       {city.hero_image_url ? (
-        <Image
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           src={city.hero_image_url}
           alt={city.name}
-          fill
-          priority
-          className="object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-green-900 to-green-700" />
