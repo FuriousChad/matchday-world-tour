@@ -68,8 +68,7 @@ export async function POST(request: Request) {
     // ── 4. Upsert — update existing rows if the match already exists ──────
     const { error, count } = await supabase
       .from('matches')
-      .upsert(rows, { onConflict: 'api_match_id', ignoreDuplicates: false })
-      .select('id', { count: 'exact', head: true })
+      .upsert(rows, { onConflict: 'api_match_id', ignoreDuplicates: false, count: 'exact' })
 
     if (error) throw error
 
