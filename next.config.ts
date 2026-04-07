@@ -1,7 +1,25 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    remotePatterns: [
+      // Supabase storage
+      {
+        protocol: 'https',
+        hostname: 'vcmwgpweqcbmfqoidtgn.supabase.co',
+      },
+      // Flag CDN (team flags)
+      {
+        protocol: 'https',
+        hostname: 'flagcdn.com',
+      },
+      // Google user avatars (OAuth)
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
+}
 
-export default nextConfig;
+export default nextConfig

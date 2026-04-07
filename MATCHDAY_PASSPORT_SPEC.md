@@ -1,4 +1,4 @@
-# Matchday Passport — Product Spec
+# Matchday World Tour — Product Spec
 
 **Version:** 2.0
 **Last Updated:** 2026-04-07
@@ -9,7 +9,7 @@
 
 ## Vision
 
-Matchday Passport is a mobile-first web app for international football fans traveling to the United States for the 2026 FIFA World Cup.
+Matchday World Tour is a mobile-first web app for international football fans traveling to the United States for the 2026 FIFA World Cup.
 
 The core user journey:
 > "I support [Team] → where are they playing? → what do I do in that city?"
