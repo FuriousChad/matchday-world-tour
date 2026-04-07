@@ -35,7 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7050091037541352" crossOrigin="anonymous"></script></head>
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7050091037541352" crossOrigin="anonymous"></script>
+        
+        </head>
       <body className="min-h-full flex flex-col bg-background">
         <Navbar />
         <MatchBanner />
