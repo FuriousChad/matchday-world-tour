@@ -1,17 +1,17 @@
 import type { City } from '@/types'
 
 const CITY_IMAGES: Record<string, string> = {
-  'new-york-new-jersey': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Lower_Manhattan_from_Governors_Island_September_2016_panorama_1.jpg/1600px-Lower_Manhattan_from_Governors_Island_September_2016_panorama_1.jpg',
-  'los-angeles':         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Los_Angeles_downtown_sunset_cityscape.jpg/1600px-Los_Angeles_downtown_sunset_cityscape.jpg',
-  'kansas-city':         'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Downtown_Kansas_City_from_Liberty_Memorial_Full.jpg/1600px-Downtown_Kansas_City_from_Liberty_Memorial_Full.jpg',
-  'miami':               'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Downtown_Miami_Panorama_from_the_Rusty_Pelican_photo_D_Ramey_Logan.jpg/1600px-Downtown_Miami_Panorama_from_the_Rusty_Pelican_photo_D_Ramey_Logan.jpg',
-  'dallas':              'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Dallas_Skyline_with_Arts_District.jpg/1600px-Dallas_Skyline_with_Arts_District.jpg',
-  'atlanta':             'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Midtown_Atlanta_skyline_from_Clara_Meer_in_Piedmont_Park.JPG/1600px-Midtown_Atlanta_skyline_from_Clara_Meer_in_Piedmont_Park.JPG',
-  'seattle':             'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SeattleI5Skyline.jpg/1600px-SeattleI5Skyline.jpg',
-  'san-francisco':       'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/San_Francisco_Panorama_from_Twin_Peaks_2013.jpg/1600px-San_Francisco_Panorama_from_Twin_Peaks_2013.jpg',
-  'philadelphia':        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Philadelphia_skyline_from_South_Street_Bridge.jpg/1600px-Philadelphia_skyline_from_South_Street_Bridge.jpg',
-  'boston':              'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Boston_skyline_from_Longfellow_Bridge_September_2017_panorama_2.jpg/1600px-Boston_skyline_from_Longfellow_Bridge_September_2017_panorama_2.jpg',
-  'houston':             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Houston_Skyline11.jpg/1600px-Houston_Skyline11.jpg',
+  'new-york-new-jersey': '/images/cities/new-york-new-jersey.jpg',
+  'los-angeles':         '/images/cities/los-angeles.jpg',
+  'kansas-city':         '/images/cities/kansas-city.jpg',
+  'miami':               '/images/cities/miami.jpg',
+  'dallas':              '/images/cities/dallas.jpg',
+  'atlanta':             '/images/cities/atlanta.jpg',
+  'seattle':             '/images/cities/seattle.jpg',
+  'san-francisco':       '/images/cities/san-francisco.jpg',
+  'philadelphia':        '/images/cities/philadelphia.jpg',
+  'boston':              '/images/cities/boston.jpg',
+  'houston':             '/images/cities/houston.jpg',
 }
 
 export function CityHero({ city }: { city: City }) {
