@@ -27,7 +27,7 @@ export function MatchList({ matches, citySlug }: Props) {
             className={[
               'rounded-xl border p-4 transition-all duration-200',
               isMyTeam
-                ? 'bg-green-950/10 border-green-500 shadow-[0_0_24px_rgba(34,197,94,0.2)] ring-1 ring-green-500/40'
+                ? 'bg-green-500/5 border-green-500 shadow-[0_0_24px_rgba(34,197,94,0.12)] ring-1 ring-green-500/30'
                 : 'bg-card',
             ].join(' ')}
           >

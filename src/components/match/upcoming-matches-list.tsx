@@ -25,7 +25,7 @@ export function UpcomingMatchesList({ matches }: { matches: Match[] }) {
             className={[
               'rounded-xl border p-4 transition-all duration-200 space-y-2',
               isMyTeam
-                ? 'bg-green-950/10 border-green-500 shadow-[0_0_24px_rgba(34,197,94,0.2)] hover:shadow-[0_0_32px_rgba(34,197,94,0.35)] ring-1 ring-green-500/40'
+                ? 'bg-green-500/5 border-green-500 shadow-[0_0_24px_rgba(34,197,94,0.12)] hover:shadow-[0_0_32px_rgba(34,197,94,0.2)] ring-1 ring-green-500/30'
                 : 'bg-card hover:shadow-md',
             ].join(' ')}
           >
