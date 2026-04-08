@@ -19,7 +19,7 @@ _Nothing currently in progress._
 - [ ] My Trip / Saved page — build out `/saved` to display a user's saved cities, places, and matches
 
 ### Content
-- [ ] City hero images — populate `hero_image_url` for all 11 cities
+- [ ] Houston hero image — find and add a replacement skyline photo (current file is broken)
 - [ ] Travel tips — populate `travel_tips` field per city (transport, neighbourhoods, practical advice)
 - [ ] Blog — build out `/blog` layout and publish first posts via Directus
 
