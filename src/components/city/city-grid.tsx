@@ -51,9 +51,14 @@ export function CityGrid({ cities, featured }: Props) {
               </Badge>
             )}
           </div>
-          <div className="p-3">
-            <h3 className="font-semibold text-sm">{city.name}</h3>
-            <p className="text-xs text-muted-foreground">{city.state}</p>
+          <div className="p-3 flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="font-semibold text-sm truncate">{city.name}</h3>
+              <p className="text-xs text-muted-foreground">{city.state}</p>
+            </div>
+            <span className="shrink-0 text-xs font-semibold text-green-600 bg-green-50 dark:bg-green-950/40 px-2 py-1 rounded-full whitespace-nowrap">
+              See Matches →
+            </span>
           </div>
         </Link>
         )
