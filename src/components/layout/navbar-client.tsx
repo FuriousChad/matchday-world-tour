@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, type ComponentType } from 'react'
@@ -28,7 +29,6 @@ const STATIC_NAV_SECTIONS: StaticNavSection[] = [
     label: 'Explore',
     icon: Compass,
     items: [
-      { href: '/', label: 'Home', icon: Home },
       { href: '/blog', label: 'Guides', icon: Newspaper },
     ],
   },
@@ -61,6 +61,98 @@ function NavLinks({ teams, cities, compact = false }: { teams: Team[]; cities: C
 
   return (
     <div className="space-y-4">
+      <ul className="space-y-1">
+        <li>
+          <Link
+            href="/"
+            className={cn(
+              'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              pathname === '/' ? 'bg-green-600/10 text-green-700' : 'text-foreground/70 hover:bg-muted hover:text-foreground'
+            )}
+          >
+            <Home className="h-4 w-4" />
+            <span>Home</span>
+          </Link>
+        </li>
+      </ul>
+
+      <div>
+        <button
+          type="button"
+          onClick={() => toggleSection('teams')}
+          className={cn(
+            'mb-1 flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-muted/60',
+            compact && 'text-[11px]'
+          )}
+          aria-expanded={openSections.teams}
+        >
+          <span className="inline-flex items-center gap-2">
+            <Users className="h-3.5 w-3.5" />
+            Teams
+          </span>
+          <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.teams && 'rotate-180')} />
+        </button>
+        {openSections.teams && (
+          <ul className="space-y-1">
+            {teams.map((team) => (
+              <li key={team.id}>
+                <Link
+                  href={`/team?team=${team.slug}`}
+                  className={cn(
+                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
+                    pathname === '/team' ? 'text-foreground' : 'text-foreground/70 hover:bg-muted hover:text-foreground'
+                  )}
+                >
+                  {team.flag_url ? (
+                    <Image src={team.flag_url} alt={`${team.name} flag`} width={18} height={12} className="rounded-sm object-cover shrink-0" />
+                  ) : (
+                    <Shield className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  )}
+                  <span>{team.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div>
+        <button
+          type="button"
+          onClick={() => toggleSection('cities')}
+          className={cn(
+            'mb-1 flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-muted/60',
+            compact && 'text-[11px]'
+          )}
+          aria-expanded={openSections.cities}
+        >
+          <span className="inline-flex items-center gap-2">
+            <Building2 className="h-3.5 w-3.5" />
+            Host Cities
+          </span>
+          <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.cities && 'rotate-180')} />
+        </button>
+        {openSections.cities && (
+          <ul className="space-y-1">
+            {cities.map((city) => (
+              <li key={city.id}>
+                <Link
+                  href={`/cities/${city.slug}`}
+                  className={cn(
+                    'block rounded-lg px-3 py-2 text-sm transition-colors',
+                    pathname === `/cities/${city.slug}`
+                      ? 'bg-green-600/10 text-green-700'
+                      : 'text-foreground/70 hover:bg-muted hover:text-foreground'
+                  )}
+                >
+                  {city.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
       {STATIC_NAV_SECTIONS.map((section) => {
         const isOpen = openSections[section.id]
         const SectionIcon = section.icon
@@ -109,78 +201,6 @@ function NavLinks({ teams, cities, compact = false }: { teams: Team[]; cities: C
           </div>
         )
       })}
-
-      <div>
-        <button
-          type="button"
-          onClick={() => toggleSection('teams')}
-          className={cn(
-            'mb-1 flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-muted/60',
-            compact && 'text-[11px]'
-          )}
-          aria-expanded={openSections.teams}
-        >
-          <span className="inline-flex items-center gap-2">
-            <Users className="h-3.5 w-3.5" />
-            Teams
-          </span>
-          <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.teams && 'rotate-180')} />
-        </button>
-        {openSections.teams && (
-          <ul className="max-h-56 space-y-1 overflow-y-auto pr-1">
-            {teams.map((team) => (
-              <li key={team.id}>
-                <Link
-                  href={`/team?team=${team.slug}`}
-                  className={cn(
-                    'block rounded-lg px-3 py-2 text-sm transition-colors',
-                    pathname === '/team' ? 'text-foreground' : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                  )}
-                >
-                  {team.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div>
-        <button
-          type="button"
-          onClick={() => toggleSection('cities')}
-          className={cn(
-            'mb-1 flex w-full items-center justify-between rounded-md px-2 py-1 text-left text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground hover:bg-muted/60',
-            compact && 'text-[11px]'
-          )}
-          aria-expanded={openSections.cities}
-        >
-          <span className="inline-flex items-center gap-2">
-            <Building2 className="h-3.5 w-3.5" />
-            Cities
-          </span>
-          <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.cities && 'rotate-180')} />
-        </button>
-        {openSections.cities && (
-          <ul className="max-h-56 space-y-1 overflow-y-auto pr-1">
-            {cities.map((city) => (
-              <li key={city.id}>
-                <Link
-                  href={`/cities/${city.slug}`}
-                  className={cn(
-                    'block rounded-lg px-3 py-2 text-sm transition-colors',
-                    pathname === `/cities/${city.slug}`
-                      ? 'bg-green-600/10 text-green-700'
-                      : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                  )}
-                >
-                  {city.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   )
 }
