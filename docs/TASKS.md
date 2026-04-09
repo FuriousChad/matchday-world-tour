@@ -20,7 +20,7 @@ _Nothing currently in progress._
 
 ### Content
 - [ ] Houston hero image — find and add a replacement skyline photo (current file is broken)
-- [ ] Travel tips — populate `travel_tips` field per city (transport, neighbourhoods, practical advice)
+- [x] Travel tips — populated `travel_tips` field per city (transport, neighbourhoods, practical advice)
 - [ ] Blog — build out `/blog` layout and publish first posts via Directus
 
 ### UX / Polish
