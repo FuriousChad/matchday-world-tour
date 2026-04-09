@@ -12,7 +12,7 @@ export default async function HomePage() {
   ])
 
   return (
-    <div className="pb-20 md:pb-0">
+    <div>
       <section className="bg-gradient-to-b from-green-950 to-green-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-3xl space-y-4 text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-green-200">World Cup 2026 Planner</p>
