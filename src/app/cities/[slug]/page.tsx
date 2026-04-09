@@ -13,6 +13,7 @@ import { MatchList } from '@/components/match/match-list'
 import { PlaceGrid } from '@/components/city/place-grid'
 import { ItinerarySection } from '@/components/city/itinerary-section'
 import { TravelTips } from '@/components/city/travel-tips'
+import { buildTwitterMetadata, toAbsoluteUrl, trimDescription } from '@/lib/seo'
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -20,9 +21,47 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const city = await getCityBySlug(slug)
   if (!city) return {}
+
+  const description = trimDescription(city.description)
+  const pageTitle = `${city.name}, ${city.state} — 2026 World Cup City Guide`
+  const pagePath = `/cities/${slug}`
+  const imagePath = `${pagePath}/opengraph-image`
+
   return {
-    title: `${city.name} World Cup Guide`,
-    description: city.description,
+    title: pageTitle,
+    description,
+    keywords: [
+      `${city.name} World Cup travel guide`,
+      `${city.name} 2026 FIFA World Cup`,
+      `${city.name} matchday itinerary`,
+      `${city.name} stadium guide`,
+    ],
+    alternates: {
+      canonical: pagePath,
+    },
+    openGraph: {
+      type: 'article',
+      title: pageTitle,
+      description,
+      url: pagePath,
+      images: [
+        {
+          url: imagePath,
+          width: 1200,
+          height: 630,
+          alt: `${city.name} 2026 World Cup city guide`,
+        },
+      ],
+    },
+    twitter: buildTwitterMetadata(
+      pageTitle,
+      description,
+      imagePath,
+      `${city.name} 2026 World Cup city guide`
+    ),
+    other: {
+      'og:image:secure_url': toAbsoluteUrl(imagePath),
+    },
   }
 }
 
