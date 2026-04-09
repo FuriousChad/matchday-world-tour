@@ -62,6 +62,9 @@ export async function POST(request: Request) {
         stadium_id:    stadiumId,
         home_team_id:  homeName ? (teamByName[homeName.toLowerCase()] ?? null) : null,
         away_team_id:  awayName ? (teamByName[awayName.toLowerCase()] ?? null) : null,
+        status:        m.status,
+        home_score:    m.score?.fullTime?.home ?? null,
+        away_score:    m.score?.fullTime?.away ?? null,
       }
     })
 

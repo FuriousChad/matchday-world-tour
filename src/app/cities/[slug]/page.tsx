@@ -9,7 +9,7 @@ import {
 import { createClient } from '@/lib/supabase/server'
 import { CityHero } from '@/components/city/city-hero'
 import { StadiumCard } from '@/components/city/stadium-card'
-import { MatchList } from '@/components/match/match-list'
+import { CityFixtures } from '@/components/match/city-fixtures'
 import { PlaceGrid } from '@/components/city/place-grid'
 import { ItinerarySection } from '@/components/city/itinerary-section'
 import { TravelTips } from '@/components/city/travel-tips'
@@ -98,8 +98,11 @@ export default async function CityPage({ params }: Props) {
 
         {matches.length > 0 && (
           <section id="matches">
-            <h2 className="text-xl font-semibold mb-4">Matches</h2>
-            <MatchList matches={matches} citySlug={slug} />
+            <div className="flex items-baseline justify-between mb-5">
+              <h2 className="text-xl font-semibold">Matches</h2>
+              <span className="text-sm text-muted-foreground">{matches.length} fixture{matches.length !== 1 ? 's' : ''}</span>
+            </div>
+            <CityFixtures matches={matches} citySlug={slug} />
           </section>
         )}
 

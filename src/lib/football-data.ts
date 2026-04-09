@@ -6,12 +6,17 @@ const API_KEY = process.env.FOOTBALL_DATA_API_KEY!
 export type FDMatch = {
   id: number
   utcDate: string
-  status: string
+  status: string  // SCHEDULED | TIMED | IN_PLAY | PAUSED | FINISHED | POSTPONED | SUSPENDED | CANCELLED
   matchday: number
   stage: string
   group: string | null
   homeTeam: { id: number; name: string } | null
   awayTeam: { id: number; name: string } | null
+  score: {
+    winner: string | null
+    fullTime: { home: number | null; away: number | null }
+    halfTime: { home: number | null; away: number | null }
+  } | null
 }
 
 export async function fetchWCMatches(): Promise<FDMatch[]> {

@@ -37,6 +37,9 @@ export type Match = {
   match_date: string
   stage: string
   api_match_id: string | null
+  home_score: number | null
+  away_score: number | null
+  status: string  // SCHEDULED | TIMED | IN_PLAY | PAUSED | FINISHED | POSTPONED | SUSPENDED | CANCELLED
   created_at: string
   // joined
   city?: City
