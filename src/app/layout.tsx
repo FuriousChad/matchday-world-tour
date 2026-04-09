@@ -76,7 +76,7 @@ export default function RootLayout({
         />
         <div className="md:flex">
           <Navbar />
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 pt-14">
             <MatchBanner />
             <main className="flex-1">{children}</main>
           </div>

@@ -200,15 +200,15 @@ function NavLinks({ teams, cities, compact = false }: { teams: Team[]; cities: C
 export function NavbarClient({ teams, cities }: { teams: Team[]; cities: City[] }) {
   return (
     <>
-      <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur md:hidden supports-[backdrop-filter]:bg-background/70">
-        <div className="container mx-auto flex h-14 items-center justify-between px-4">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+        <div className="flex h-14 items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <span className="text-green-600">⚽</span> Matchday World Tour
           </Link>
 
           <Sheet>
             <SheetTrigger
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border bg-background"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border bg-background md:hidden"
               aria-label="Open navigation menu"
             >
               <Menu className="h-5 w-5" />
@@ -233,14 +233,7 @@ export function NavbarClient({ teams, cities }: { teams: Team[]; cities: City[] 
         </div>
       </header>
 
-      <aside className="hidden h-screen w-72 shrink-0 border-r bg-card md:sticky md:top-0 md:flex md:flex-col">
-        <div className="border-b px-5 py-4">
-          <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-            <span className="text-green-600">⚽</span> Matchday World Tour
-          </Link>
-          <p className="mt-1 text-xs text-muted-foreground">World Cup 2026 travel planner</p>
-        </div>
-
+      <aside className="hidden w-72 shrink-0 border-r bg-card md:sticky md:top-14 md:flex md:flex-col" style={{ height: 'calc(100vh - 3.5rem)' }}>
         <div className="flex-1 overflow-y-auto p-4">
           <NavLinks teams={teams} cities={cities} />
         </div>
