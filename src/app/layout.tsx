@@ -74,10 +74,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <Navbar />
-        <div className="md:pl-72">
-          <MatchBanner />
-          <main className="flex-1">{children}</main>
+        <div className="md:flex">
+          <Navbar />
+          <div className="min-w-0 flex-1">
+            <MatchBanner />
+            <main className="flex-1">{children}</main>
+          </div>
         </div>
       </body>
     </html>
