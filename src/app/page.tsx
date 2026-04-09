@@ -11,8 +11,6 @@ export default async function HomePage() {
     getUpcomingMatches(6),
   ])
 
-  const nonFeaturedCities = cities.filter((city) => !featured.some((featuredCity) => featuredCity.id === city.id))
-
   return (
     <div className="pb-20 md:pb-0">
       <section className="bg-gradient-to-b from-green-950 to-green-900 px-4 py-16 text-white">
@@ -50,25 +48,13 @@ export default async function HomePage() {
         </section>
       )}
 
-      {featured.length > 0 && (
-        <section id="featured-cities" className="px-4 py-10">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="mb-1 text-xl font-semibold">Featured Cities</h2>
-            <p className="mb-6 text-sm text-muted-foreground">
-              Start with the highest-demand destinations and lock in your plans early.
-            </p>
-            <CityGrid cities={featured} featured={featured} />
-          </div>
-        </section>
-      )}
-
       <section className="px-4 py-10">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="mb-1 text-xl font-semibold">All Host Cities</h2>
+          <h2 className="mb-1 text-xl font-semibold">Host Cities</h2>
           <p className="mb-6 text-sm text-muted-foreground">
-            11 cities. One tournament. Compare venues, travel tips, and match schedules.
+            11 cities. One tournament. Compare venues, travel tips, and match schedules in one place.
           </p>
-          <CityGrid cities={nonFeaturedCities} featured={featured} />
+          <CityGrid cities={cities} featured={featured} />
         </div>
       </section>
     </div>
