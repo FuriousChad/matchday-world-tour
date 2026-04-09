@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, type ComponentType } from 'react'
 import { Menu, ChevronDown, Compass, Newspaper, Home, Bookmark, Shield, Building2, Users } from 'lucide-react'
@@ -127,17 +128,28 @@ function NavLinks({ teams, cities, compact = false }: { teams: Team[]; cities: C
           <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.teams && 'rotate-180')} />
         </button>
         {openSections.teams && (
-          <ul className="max-h-56 space-y-1 overflow-y-auto pr-1">
+          <ul className="space-y-1">
             {teams.map((team) => (
               <li key={team.id}>
                 <Link
                   href={`/team?team=${team.slug}`}
                   className={cn(
-                    'block rounded-lg px-3 py-2 text-sm transition-colors',
+                    'flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
                     pathname === '/team' ? 'text-foreground' : 'text-foreground/70 hover:bg-muted hover:text-foreground'
                   )}
                 >
-                  {team.name}
+                  {team.flag_url ? (
+                    <Image
+                      src={team.flag_url}
+                      alt={team.name}
+                      width={20}
+                      height={14}
+                      className="rounded-sm object-cover shrink-0"
+                    />
+                  ) : (
+                    <div className="h-3.5 w-5 rounded-sm bg-muted shrink-0" />
+                  )}
+                  <span className="truncate">{team.name}</span>
                 </Link>
               </li>
             ))}
@@ -162,7 +174,7 @@ function NavLinks({ teams, cities, compact = false }: { teams: Team[]; cities: C
           <ChevronDown className={cn('h-4 w-4 transition-transform', openSections.cities && 'rotate-180')} />
         </button>
         {openSections.cities && (
-          <ul className="max-h-56 space-y-1 overflow-y-auto pr-1">
+          <ul className="space-y-1">
             {cities.map((city) => (
               <li key={city.id}>
                 <Link
