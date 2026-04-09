@@ -75,8 +75,10 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         <Navbar />
-        <MatchBanner />
-        <main className="flex-1">{children}</main>
+        <div className="md:pl-72">
+          <MatchBanner />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   )
