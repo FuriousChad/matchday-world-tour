@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import { Navbar } from '@/components/layout/navbar'
 import { MatchBanner } from '@/components/shared/match-banner'
+import { getMetadataBase } from '@/lib/seo'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,6 +17,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
   title: {
     default: 'Matchday World Tour — Your World Cup Travel Guide',
     template: '%s | Matchday World Tour',
@@ -23,9 +25,36 @@ export const metadata: Metadata = {
   description:
     'The ultimate travel companion for international football fans at the 2026 FIFA World Cup in the USA. Find your team, explore host cities, discover matchday spots.',
   keywords: ['World Cup 2026', 'FIFA', 'football travel', 'USA 2026', 'matchday guide'],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     type: 'website',
     siteName: 'Matchday World Tour',
+    title: 'Matchday World Tour — Your World Cup Travel Guide',
+    description:
+      'The ultimate travel companion for international football fans at the 2026 FIFA World Cup in the USA. Find your team, explore host cities, discover matchday spots.',
+    url: '/',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Matchday World Tour — 2026 World Cup travel guides and matchday planning',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Matchday World Tour — Your World Cup Travel Guide',
+    description:
+      'The ultimate travel companion for international football fans at the 2026 FIFA World Cup in the USA. Find your team, explore host cities, discover matchday spots.',
+    images: [
+      {
+        url: '/opengraph-image',
+        alt: 'Matchday World Tour — 2026 World Cup travel guides and matchday planning',
+      },
+    ],
   },
   other: {
     'google-adsense-account': 'ca-pub-7050091037541352',

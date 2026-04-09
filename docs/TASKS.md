@@ -26,7 +26,7 @@ _Nothing currently in progress._
 ### UX / Polish
 - [ ] Homepage improvements — team picker flow, featured cities section, upcoming matches widget
 - [ ] Fix GitHub auto-deploy — currently requires manual `vercel deploy --prod` after every push
-- [ ] SEO — meta titles, descriptions, and Open Graph images for city and team pages
+- [x] SEO — meta titles, descriptions, and Open Graph images for city and team pages
 
 ### Growth
 - [ ] Affiliate links — wire Booking.com / OpenTable / Viator URLs into place cards
