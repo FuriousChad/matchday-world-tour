@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
 import { SaveButton } from '@/components/shared/save-button'
 import type { City } from '@/types'
 
@@ -16,76 +17,60 @@ const CITY_IMAGES: Record<string, string> = {
   'houston':             '/images/cities/houston.jpg',
 }
 
-export function CityGrid({ cities }: { cities: City[] }) {
+type Props = {
+  cities: City[]
+  featured: City[]
+}
+
+export function CityGrid({ cities, featured }: Props) {
+  const featuredIds = new Set(featured.map((c) => c.id))
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {cities.map((city) => {
         const imageUrl = CITY_IMAGES[city.slug]
         return (
-          <Link
-            key={city.id}
-            href={`/cities/${city.slug}`}
-            className="group relative rounded-xl overflow-hidden transition-all duration-200 hover:scale-[1.01] hover:shadow-xl"
-            style={{
-              border: '1px solid var(--color-border)',
-              fontFamily: 'var(--font-outfit, sans-serif)',
-            }}
-          >
-            {/* Photo */}
-            <div className="relative h-40 overflow-hidden bg-muted">
-              {imageUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={imageUrl}
-                  alt={city.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-700" />
-              )}
-              {/* Dark gradient over bottom of photo */}
-              <div
-                className="absolute inset-x-0 bottom-0 h-16"
-                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)' }}
+        <Link
+          key={city.id}
+          href={`/cities/${city.slug}`}
+          className="group relative rounded-xl overflow-hidden border hover:shadow-lg transition-shadow bg-card"
+        >
+          <div className="relative h-40 overflow-hidden">
+            {imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={imageUrl}
+                alt={city.name}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              {/* Save button */}
-              <SaveButton
-                type="city"
-                id={city.id}
-                label={city.name}
-                sublabel={city.state}
-                image_url={imageUrl ?? null}
-                href={`/cities/${city.slug}`}
-                className="absolute top-2 right-2 shadow-sm"
-              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-green-800 to-green-600" />
+            )}
+            {featuredIds.has(city.id) && (
+              <Badge className="absolute top-2 left-2 bg-green-600 text-white border-0">
+                Featured
+              </Badge>
+            )}
+            <SaveButton
+              type="city"
+              id={city.id}
+              label={city.name}
+              sublabel={city.state}
+              image_url={imageUrl ?? null}
+              href={`/cities/${city.slug}`}
+              className="absolute top-2 right-2 shadow-sm"
+            />
+          </div>
+          <div className="p-3 flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="font-semibold text-sm truncate">{city.name}</h3>
+              <p className="text-xs text-muted-foreground">{city.state}</p>
             </div>
-
-            {/* Card footer */}
-            <div
-              className="px-3.5 py-3 flex items-center justify-between gap-2"
-              style={{ background: 'var(--color-card)' }}
-            >
-              <div className="min-w-0">
-                <h3
-                  className="leading-none truncate text-foreground"
-                  style={{
-                    fontFamily: 'var(--font-bebas, sans-serif)',
-                    fontSize: '1.15rem',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  {city.name}
-                </h3>
-                <p className="text-[11px] text-muted-foreground mt-0.5">{city.state}</p>
-              </div>
-              <span
-                className="shrink-0 text-[9px] font-bold tracking-[0.18em] uppercase px-2.5 py-1.5 rounded-full transition-colors group-hover:opacity-80"
-                style={{ color: '#d4a843', background: 'rgba(212,168,67,0.1)', border: '1px solid rgba(212,168,67,0.2)' }}
-              >
-                Explore →
-              </span>
-            </div>
-          </Link>
+            <span className="shrink-0 text-xs font-semibold text-green-600 bg-green-50 dark:bg-green-950/40 px-2 py-1 rounded-full whitespace-nowrap">
+              See Matches →
+            </span>
+          </div>
+        </Link>
         )
       })}
     </div>

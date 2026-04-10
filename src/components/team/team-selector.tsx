@@ -11,79 +11,29 @@ export function TeamSelector() {
 
   if (myTeam) {
     return (
-      <div
-        className="relative overflow-hidden rounded-2xl"
-        style={{ background: '#04070f', border: '1px solid rgba(255,255,255,0.08)' }}
-      >
-        {/* Blurred flag backdrop */}
-        {myTeam.flag_url && (
-          <div
-            className="absolute inset-0 scale-110"
-            style={{
-              backgroundImage: `url(${myTeam.flag_url.replace('/w40/', '/w160/')})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'blur(24px) saturate(1.4)',
-              opacity: 0.14,
-            }}
-          />
-        )}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(135deg, rgba(4,7,15,0.97) 40%, rgba(4,7,15,0.7) 100%)' }}
-        />
-
-        <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-5 py-5 md:px-6">
-          <div className="flex items-center gap-4">
+      <div className="rounded-2xl border bg-card p-5 md:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
             {myTeam.flag_url && (
-              <div className="shrink-0 rounded-sm overflow-hidden shadow-lg" style={{ border: '1px solid rgba(255,255,255,0.12)' }}>
-                <Image
-                  src={myTeam.flag_url.replace('/w40/', '/w80/')}
-                  alt={myTeam.name}
-                  width={52}
-                  height={35}
-                  className="block object-cover"
-                />
-              </div>
+              <Image src={myTeam.flag_url} alt={myTeam.name} width={40} height={28} className="rounded object-cover" />
             )}
             <div>
-              <p
-                className="text-[9px] font-bold tracking-[0.22em] uppercase mb-0.5"
-                style={{ color: '#d4a843' }}
-              >
-                Following
-              </p>
-              <p
-                className="text-white leading-none"
-                style={{
-                  fontFamily: 'var(--font-bebas, sans-serif)',
-                  fontSize: 'clamp(1.6rem, 5vw, 2rem)',
-                  letterSpacing: '0.05em',
-                }}
-              >
-                {myTeam.name}
-              </p>
-              <p className="text-[11px] mt-1" style={{ color: 'rgba(160,168,184,0.7)' }}>
-                Fixtures are highlighted across the site.
-              </p>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Your team</p>
+              <p className="text-lg font-semibold">{myTeam.name}</p>
+              <p className="text-sm text-muted-foreground">You&apos;ll get highlighted fixtures across the site.</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 shrink-0">
+          <div className="flex flex-wrap gap-2">
             <Link
               href="/team"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[12px] font-bold tracking-wide transition-all duration-150 hover:scale-[1.02]"
-              style={{ background: '#d4a843', color: '#04070f', fontFamily: 'var(--font-outfit, sans-serif)' }}
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700"
             >
-              View Schedule
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="m9 18 6-6-6-6"/>
-              </svg>
+              View Team Hub
             </Link>
             <Link
               href="/team"
-              className="inline-flex items-center px-4 py-2 rounded-lg text-[12px] font-semibold transition-colors hover:bg-white/10"
-              style={{ color: 'rgba(255,255,255,0.65)', border: '1px solid rgba(255,255,255,0.12)', fontFamily: 'var(--font-outfit, sans-serif)' }}
+              className="rounded-lg border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
             >
               Change Team
             </Link>
@@ -94,56 +44,25 @@ export function TeamSelector() {
   }
 
   return (
-    <div
-      className="relative overflow-hidden rounded-2xl"
-      style={{ background: '#04070f', border: '1px solid rgba(255,255,255,0.08)' }}
-    >
-      {/* Subtle mesh */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'radial-gradient(ellipse 70% 80% at 90% 50%, rgba(212,168,67,0.07) 0%, transparent 70%)',
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-5 py-5 md:px-6">
+    <div className="rounded-2xl border bg-card p-5 md:p-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p
-            className="text-[9px] font-bold tracking-[0.22em] uppercase mb-1"
-            style={{ color: '#d4a843' }}
-          >
-            Get Started
-          </p>
-          <p
-            className="text-white leading-none mb-2"
-            style={{
-              fontFamily: 'var(--font-bebas, sans-serif)',
-              fontSize: 'clamp(1.5rem, 5vw, 1.9rem)',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Pick the Nation You&rsquo;re Backing
-          </p>
-          <p className="text-[12px]" style={{ color: 'rgba(160,168,184,0.7)' }}>
-            We&rsquo;ll personalize fixtures and help you plan every matchday.
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Step 1 of 3</p>
+          <p className="text-lg font-semibold">Pick the team you&apos;re backing</p>
+          <p className="text-sm text-muted-foreground">
+            We&apos;ll personalize match highlights and help you plan around their fixtures.
           </p>
         </div>
-
-        <div className="flex gap-2 shrink-0">
+        <div className="flex gap-2">
           <Link
             href="/team"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[12px] font-bold tracking-wide transition-all duration-150 hover:scale-[1.02]"
-            style={{ background: '#d4a843', color: '#04070f', fontFamily: 'var(--font-outfit, sans-serif)' }}
+            className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700"
           >
-            Choose Team
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="m9 18 6-6-6-6"/>
-            </svg>
+            Pick a Team
           </Link>
           <Link
-            href="#cities"
-            className="inline-flex items-center px-4 py-2 rounded-lg text-[12px] font-semibold transition-colors hover:bg-white/10"
-            style={{ color: 'rgba(255,255,255,0.65)', border: '1px solid rgba(255,255,255,0.12)', fontFamily: 'var(--font-outfit, sans-serif)' }}
+            href="#featured-cities"
+            className="rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
           >
             Explore Cities
           </Link>
