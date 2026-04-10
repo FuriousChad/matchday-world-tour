@@ -225,7 +225,7 @@ function TeamDashboard({
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <div
         className="relative overflow-hidden"
-        style={{ background: '#04070f', fontFamily: "'Outfit', sans-serif" }}
+        style={{ background: 'linear-gradient(to bottom, #052e16, #14532d)', fontFamily: "'Outfit', sans-serif" }}
       >
         {/* Blurred flag backdrop */}
         {heroBg && (
@@ -245,7 +245,7 @@ function TeamDashboard({
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(135deg, rgba(4,7,15,0.98) 0%, rgba(4,7,15,0.88) 55%, rgba(4,7,15,0.65) 100%)',
+              'linear-gradient(135deg, rgba(5,46,22,0.97) 0%, rgba(5,46,22,0.88) 55%, rgba(5,46,22,0.60) 100%)',
           }}
         />
 
