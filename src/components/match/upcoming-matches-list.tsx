@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Badge } from '@/components/ui/badge'
 import { formatMatchDate } from '@/lib/utils/date'
 import { useMyTeam } from '@/hooks/use-my-team'
 import type { Match } from '@/types'
@@ -11,7 +10,7 @@ export function UpcomingMatchesList({ matches }: { matches: Match[] }) {
   const myTeam = useMyTeam()
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
       {matches.map((match) => {
         const citySlug = match.city?.slug ?? ''
         const isMyTeam =
@@ -22,31 +21,77 @@ export function UpcomingMatchesList({ matches }: { matches: Match[] }) {
           <Link
             key={match.id}
             href={`/cities/${citySlug}`}
-            className={[
-              'rounded-xl border p-4 transition-all duration-200 space-y-2',
-              isMyTeam
-                ? 'bg-green-500/5 border-green-500 shadow-[0_0_24px_rgba(34,197,94,0.12)] hover:shadow-[0_0_32px_rgba(34,197,94,0.2)] ring-1 ring-green-500/30'
-                : 'bg-card hover:shadow-md',
-            ].join(' ')}
+            className="group block rounded-xl overflow-hidden transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"
+            style={{
+              background: isMyTeam ? 'rgba(34,197,94,0.06)' : 'var(--color-card)',
+              border: isMyTeam
+                ? '1px solid rgba(34,197,94,0.35)'
+                : '1px solid var(--color-border)',
+              fontFamily: 'var(--font-outfit, sans-serif)',
+            }}
           >
+            {/* My team accent bar */}
             {isMyTeam && (
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
-                ⚽ Your Team
-              </span>
+              <div className="h-[2px] w-full bg-green-500 opacity-70" />
             )}
-            <div className="flex items-center gap-2 text-sm font-medium">
-              <TeamFlag name={match.home_team?.name ?? 'TBD'} flagUrl={match.home_team?.flag_url ?? null} highlight={myTeam?.id === match.home_team?.id} />
-              <span className="text-muted-foreground">vs</span>
-              <TeamFlag name={match.away_team?.name ?? 'TBD'} flagUrl={match.away_team?.flag_url ?? null} highlight={myTeam?.id === match.away_team?.id} />
-            </div>
-            <div className="space-y-0.5">
-              <p className="text-xs text-muted-foreground">
-                {formatMatchDate(match.match_date, citySlug, { includeTime: true })}
-              </p>
-              {match.city && (
-                <p className="text-xs font-medium text-green-600">{match.city.name}</p>
+
+            <div className="p-4">
+              {/* Your team chip */}
+              {isMyTeam && (
+                <div className="flex items-center gap-1.5 mb-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                  <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-green-500">
+                    Your Team
+                  </span>
+                </div>
               )}
-              <Badge variant="secondary" className="text-xs">{match.stage}</Badge>
+
+              {/* Teams */}
+              <div className="grid items-center gap-2" style={{ gridTemplateColumns: '1fr auto 1fr' }}>
+                <MatchTeam
+                  name={match.home_team?.name ?? 'TBD'}
+                  flagUrl={match.home_team?.flag_url ?? null}
+                  align="right"
+                  highlight={myTeam?.id === match.home_team?.id}
+                />
+                <span
+                  className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground/50 text-center"
+                >
+                  vs
+                </span>
+                <MatchTeam
+                  name={match.away_team?.name ?? 'TBD'}
+                  flagUrl={match.away_team?.flag_url ?? null}
+                  align="left"
+                  highlight={myTeam?.id === match.away_team?.id}
+                />
+              </div>
+
+              {/* Footer */}
+              <div
+                className="mt-3 pt-3 flex items-center justify-between gap-2"
+                style={{ borderTop: '1px solid var(--color-border)' }}
+              >
+                <div className="min-w-0">
+                  <p className="text-[11px] text-muted-foreground truncate">
+                    {formatMatchDate(match.match_date, citySlug, { includeTime: false })}
+                  </p>
+                  {match.city && (
+                    <p className="text-[11px] font-semibold truncate" style={{ color: '#d4a843' }}>
+                      {match.city.name}
+                    </p>
+                  )}
+                </div>
+                <span
+                  className="text-[9px] font-bold tracking-[0.15em] uppercase shrink-0 px-2 py-1 rounded-full"
+                  style={{
+                    color: 'var(--color-muted-foreground)',
+                    background: 'var(--color-muted)',
+                  }}
+                >
+                  {match.stage === 'Group Stage' ? 'Group' : match.stage}
+                </span>
+              </div>
             </div>
           </Link>
         )
@@ -55,13 +100,40 @@ export function UpcomingMatchesList({ matches }: { matches: Match[] }) {
   )
 }
 
-function TeamFlag({ name, flagUrl, highlight }: { name: string; flagUrl: string | null; highlight?: boolean }) {
+function MatchTeam({
+  name,
+  flagUrl,
+  align,
+  highlight,
+}: {
+  name: string
+  flagUrl: string | null
+  align: 'left' | 'right'
+  highlight?: boolean
+}) {
   return (
-    <span className={['flex items-center gap-1', highlight ? 'font-bold text-green-400' : ''].join(' ')}>
-      {flagUrl && (
-        <Image src={flagUrl} alt={name} width={18} height={12} className="rounded-sm object-cover" />
+    <div className={['flex items-center gap-1.5 min-w-0', align === 'right' ? 'flex-row-reverse' : ''].join(' ')}>
+      {flagUrl ? (
+        <Image
+          src={flagUrl}
+          alt={name}
+          width={22}
+          height={15}
+          className="rounded-[2px] object-cover shrink-0 shadow-sm"
+        />
+      ) : (
+        <div className="w-[22px] h-[15px] rounded bg-muted shrink-0" />
       )}
-      <span className="truncate max-w-[80px]">{name}</span>
-    </span>
+      <span
+        className={[
+          'text-xs leading-tight truncate',
+          align === 'right' ? 'text-right' : '',
+          highlight ? 'font-bold' : 'font-medium',
+        ].join(' ')}
+        style={highlight ? { color: '#22c55e' } : undefined}
+      >
+        {name}
+      </span>
+    </div>
   )
 }
