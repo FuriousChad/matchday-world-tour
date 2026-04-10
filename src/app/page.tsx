@@ -15,11 +15,20 @@ export default async function HomePage() {
     <div>
       <section className="bg-gradient-to-b from-green-950 to-green-900 px-4 py-16 text-white">
         <div className="container mx-auto max-w-3xl space-y-4 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-green-200">World Cup 2026 Planner</p>
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Follow your team from kickoff to final whistle
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-green-300" style={{ fontFamily: 'var(--font-outfit, sans-serif)' }}>
+            World Cup 2026 Planner
+          </p>
+          <h1
+            className="leading-none text-white"
+            style={{
+              fontFamily: 'var(--font-bebas, sans-serif)',
+              fontSize: 'clamp(3rem, 10vw, 5.5rem)',
+              letterSpacing: '0.04em',
+            }}
+          >
+            Follow Your Team From Kickoff to Final Whistle
           </h1>
-          <p className="text-lg text-green-100">
+          <p className="text-lg text-green-100" style={{ fontFamily: 'var(--font-outfit, sans-serif)' }}>
             Pick your nation, discover host cities, and map out every stop in your matchday journey.
           </p>
         </div>
