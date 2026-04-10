@@ -206,6 +206,11 @@ export function NavbarClient({ teams, cities }: { teams: Team[]; cities: City[] 
             <span className="text-green-600">⚽</span> Matchday World Tour
           </Link>
 
+          {/* Desktop: auth in header */}
+          <div className="hidden md:flex items-center">
+            <AuthButton />
+          </div>
+
           <Sheet>
             <SheetTrigger
               className="inline-flex h-9 w-9 items-center justify-center rounded-md border bg-background md:hidden"
@@ -236,10 +241,6 @@ export function NavbarClient({ teams, cities }: { teams: Team[]; cities: City[] 
       <aside className="hidden w-72 shrink-0 border-r bg-card md:sticky md:top-14 md:flex md:flex-col" style={{ height: 'calc(100vh - 3.5rem)' }}>
         <div className="flex-1 overflow-y-auto p-4">
           <NavLinks teams={teams} cities={cities} />
-        </div>
-
-        <div className="border-t p-4">
-          <AuthButton />
         </div>
       </aside>
     </>

@@ -109,21 +109,21 @@ export default async function CityPage({ params }: Props) {
         {bars.length > 0 && (
           <section id="spots">
             <h2 className="text-xl font-semibold mb-4">Matchday Spots</h2>
-            <PlaceGrid places={bars} />
+            <PlaceGrid places={bars} citySlug={slug} />
           </section>
         )}
 
         {restaurants.length > 0 && (
           <section id="food">
             <h2 className="text-xl font-semibold mb-4">Food & Drink</h2>
-            <PlaceGrid places={restaurants} />
+            <PlaceGrid places={restaurants} citySlug={slug} />
           </section>
         )}
 
         {attractions.length > 0 && (
           <section id="attractions">
             <h2 className="text-xl font-semibold mb-4">Attractions</h2>
-            <PlaceGrid places={attractions} />
+            <PlaceGrid places={attractions} citySlug={slug} />
           </section>
         )}
 

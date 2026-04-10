@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
+import { SaveButton } from '@/components/shared/save-button'
 import type { City } from '@/types'
 
 const CITY_IMAGES: Record<string, string> = {
@@ -50,6 +51,15 @@ export function CityGrid({ cities, featured }: Props) {
                 Featured
               </Badge>
             )}
+            <SaveButton
+              type="city"
+              id={city.id}
+              label={city.name}
+              sublabel={city.state}
+              image_url={imageUrl ?? null}
+              href={`/cities/${city.slug}`}
+              className="absolute top-2 right-2 shadow-sm"
+            />
           </div>
           <div className="p-3 flex items-center justify-between gap-2">
             <div className="min-w-0">

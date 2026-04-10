@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { getSavedItems, unsaveItem } from '@/lib/saved'
+import { useFavorites } from '@/components/shared/favorites-provider'
 import type { SavedItem } from '@/types'
 
 const TYPE_LABELS: Record<SavedItem['type'], string> = {
@@ -11,18 +12,31 @@ const TYPE_LABELS: Record<SavedItem['type'], string> = {
   match: 'Match',
 }
 
-export function SavedListClient() {
-  const [items, setItems] = useState<SavedItem[]>([])
-  const [mounted, setMounted] = useState(false)
+type Props = {
+  /** Pre-fetched items for authenticated users (from Supabase). If absent, reads localStorage. */
+  initialItems?: SavedItem[]
+}
+
+export function SavedListClient({ initialItems }: Props) {
+  const [items, setItems] = useState<SavedItem[]>(initialItems ?? [])
+  const [mounted, setMounted] = useState(!!initialItems)
+  const { toggle } = useFavorites()
 
   useEffect(() => {
-    setItems(getSavedItems())
+    if (!initialItems) {
+      setItems(getSavedItems())
+    }
     setMounted(true)
-  }, [])
+  }, [initialItems])
 
-  function remove(type: SavedItem['type'], id: string) {
-    unsaveItem(type, id)
-    setItems(getSavedItems())
+  function remove(item: SavedItem) {
+    toggle(item)
+    if (!initialItems) {
+      unsaveItem(item.type, item.id)
+      setItems(getSavedItems())
+    } else {
+      setItems((prev) => prev.filter((i) => !(i.type === item.type && i.id === item.id)))
+    }
   }
 
   if (!mounted) return null
@@ -52,7 +66,7 @@ export function SavedListClient() {
             <p className="text-xs text-green-600 mt-0.5">{TYPE_LABELS[item.type]}</p>
           </Link>
           <button
-            onClick={() => remove(item.type, item.id)}
+            onClick={() => remove(item)}
             className="text-muted-foreground hover:text-foreground text-lg leading-none shrink-0"
             aria-label="Remove"
           >

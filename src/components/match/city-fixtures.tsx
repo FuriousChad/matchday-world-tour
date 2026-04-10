@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { formatMatchDate } from '@/lib/utils/date'
 import { useMyTeam } from '@/hooks/use-my-team'
+import { SaveButton } from '@/components/shared/save-button'
 import type { Match } from '@/types'
 
 type Props = {
@@ -171,16 +172,26 @@ function FixtureCard({ match, citySlug, isMyMatch, myTeamId, finished, live, pos
           />
         </div>
 
-        {/* Footer: stadium + date */}
+        {/* Footer: stadium + save */}
         <div className="mt-2.5 flex items-center justify-between gap-2 text-[11px] text-muted-foreground">
           <span className="truncate">
             {match.stadium?.name ?? ''}
           </span>
-          {finished && (
-            <span className="shrink-0 text-[10px] font-medium text-muted-foreground/70">
-              {formatMatchDate(match.match_date, citySlug, { includeTime: false })}
-            </span>
-          )}
+          <div className="flex items-center gap-2 shrink-0">
+            {finished && (
+              <span className="text-[10px] font-medium text-muted-foreground/70">
+                {formatMatchDate(match.match_date, citySlug, { includeTime: false })}
+              </span>
+            )}
+            <SaveButton
+              type="match"
+              id={match.id}
+              label={`${match.home_team?.name ?? 'TBD'} vs ${match.away_team?.name ?? 'TBD'}`}
+              sublabel={`${match.stage}`}
+              href={`/cities/${citySlug}`}
+              className="w-7 h-7"
+            />
+          </div>
         </div>
       </div>
     </div>

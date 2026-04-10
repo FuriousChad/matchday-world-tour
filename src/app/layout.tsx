@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import { Navbar } from '@/components/layout/navbar'
 import { MatchBanner } from '@/components/shared/match-banner'
+import { FavoritesProvider } from '@/components/shared/favorites-provider'
 import { getMetadataBase } from '@/lib/seo'
 
 const geistSans = Geist({
@@ -74,13 +75,15 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <div className="md:flex">
-          <Navbar />
-          <div className="min-w-0 flex-1 pt-14">
-            <MatchBanner />
-            <main className="flex-1">{children}</main>
+        <FavoritesProvider>
+          <div className="md:flex">
+            <Navbar />
+            <div className="min-w-0 flex-1 pt-14">
+              <MatchBanner />
+              <main className="flex-1">{children}</main>
+            </div>
           </div>
-        </div>
+        </FavoritesProvider>
       </body>
     </html>
   )
